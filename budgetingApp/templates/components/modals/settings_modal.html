@@ -1,0 +1,27 @@
+{% extends "components/base/modal.html" %}
+
+{% block modal_content %}
+<div class="modal-body">
+    <form method="post" action='/account/update'>
+        {% csrf_token %}
+        
+        <input type="hidden" name="_method" value="POST" />
+        <input type="hidden" value="{{ option }}" name="updateOption" />
+
+        <div class="form-outline mb-4">
+            <label class="form-label" for="username">Current {{ option }} is</label>
+            <input type="username" id="oldEmail" class="form-control" name="oldData" placeholder="{{ oldValue }}" disabled/>
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="form-label" for="password">Insert your new {{ option }}</label>
+            <input type="username" id="newEmail" class="form-control" name="newData" placeholder="Insert your new {{ option }} here" required/>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#{{ modalId }}"> Close </a>
+        </div>
+    </form>
+</div>
+{% endblock modal_content %}

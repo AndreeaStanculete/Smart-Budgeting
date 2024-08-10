@@ -1,0 +1,110 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Mina&display=swap');
+
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'Mina', sans-serif;
+    background-image: url('../data/images/background.jpeg');
+	background-repeat: no-repeat;
+	background-size: cover;
+    background-attachment: fixed; 
+}
+
+p {
+    margin-block-start: 2px !important;
+    margin-block-end: 1em;
+    color: #990000;
+    font-family: 'Mina', sans-serif;
+}
+
+label {
+    font-family: 'Mina', sans-serif !important;
+}
+
+#PageTitle {
+    margin-block-end: 2px !important;
+    font-family: 'Mina', sans-serif;
+}
+
+.MainContainer{
+	margin-top: 0;
+	height: 100vh;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+    margin-bottom: auto;
+}
+
+.MainContent {
+	position: relative;
+	color: #f1f1f1;
+	width: 100%;
+	height: 100%;
+}
+
+#sectionBack {
+    background: rgb(31,73,61);
+    background: linear-gradient(90deg, rgba(31,73,61,1) 0%, rgba(70,94,115,1) 50%, rgba(31,73,61,1) 100%);
+}
+
+#greyArea {
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(238,238,238,1) 35%, rgba(217,217,217,1) 100%);;
+}
+
+@media (min-width: 1200px) {
+	#Cover {
+        width: 100%;
+    }
+}
+
+#Cover {
+    width: 120%;
+}
+
+.gradient-custom-2 {
+    background: rgb(76,105,131);
+    background: linear-gradient(90deg, rgba(76,105,131,1) 0%, rgba(65,81,98,1) 50%, rgba(76,105,131,1) 100%);
+}
+    
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md-12 {
+        flex: 0 0 auto;
+        width: 50% !important;
+    }
+}
+
+.btn-registerButton:hover {
+    color: white !important;
+    background-color: #415162 !important;
+    background-image: none;
+    border-color: #415162 !important;
+}
+
+.btn-registerButton {
+    color: #5b7c99 !important;
+    background-color: transparent !important;
+    background-image: none;
+    border-color: #5b7c99 !important;
+}
+
+
+
+
+

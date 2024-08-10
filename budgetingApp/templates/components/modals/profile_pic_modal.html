@@ -1,0 +1,45 @@
+{% extends "components/base/modal.html" %}
+{% load static %}
+
+{% block modal_content %}
+    <div class="modal-body">
+        <label for="typeOfIncome" class="form-label">Select an avatar</label>
+        <div id="carouselExampleIndicators" class="carousel slide justify-content-center" data-bs-touch="false" data-bs-interval="false" style="width: 45%; margin-left: 25%">
+            <div class="carousel-inner" id="pictureCarousel">
+                <div class="carousel-item active">
+                    <img src="{% static 'data/images/avatars/male_avatar.svg' %}" class="d-block w-100" alt="male_avatar">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'data/images/avatars/female_avatar.svg' %}" class="d-block w-100" alt="female_avatar">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'data/images/avatars/male_avatar2.svg' %}" class="d-block w-100" alt="male_avatar">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'data/images/avatars/female_avatar2.svg' %}" class="d-block w-100" alt="female_avatar">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="color: black">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: black"></span>
+                <span class="visually-hidden" style="color: black">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: black"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <form method="post" id="pictureForm" action="/account/update">
+        {% csrf_token %}
+
+        <input type="hidden" name="_method" value="POST" />
+        <input type="hidden" value="picture" name="updateOption" />
+        <input type="text" name="newData" id="num" style="display: none">
+
+        <div class="modal-footer">
+            <button type="button" id="submitBTN" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#{{ modalId }}"> Close </a>
+        </div>
+    </form>
+{% endblock modal_content %}

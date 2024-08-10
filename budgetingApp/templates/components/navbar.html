@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbarBlock">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item">
+                    <div class="nav-link">SmartBudgeting</div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/main">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/learn/tips">Advices</a>
+                </li>
+
+                {% if logged_in %}
+                    <div class="d-flex justify-content-center" style="width: 100%">
+                        <form class="d-flex searchInput" method="post">
+                            {% csrf_token %}
+
+                            <input type="text" value="100" id="modalId" name="modalId" style="display: none"/>
+                            <input name="searchInput" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" 
+                                style="width: 100%; height: 95%; background-color: #DCE1E0">
+                            <button class="btn search" type="submit" style="color: white">Search</button>
+                        </form>
+                    </div>
+                    <li class="nav-item dropdown ms-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-user"></i> Account</a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="/main/profile">See profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/account/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/account/login">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

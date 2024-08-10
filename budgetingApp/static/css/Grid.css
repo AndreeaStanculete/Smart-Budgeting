@@ -1,0 +1,81 @@
+
+.container {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2.1fr 1.7fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Income Expenses Savings"
+      "Statistics Statistics Statistics";
+  }
+  
+  .Income {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.3fr 2.4fr 0.3fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Buttons Buttons Buttons"
+      "Text Text Amount"
+      "Footer Footer Footer";
+    grid-area: Income;
+  }
+  
+  .Buttons { grid-area: Buttons; }
+  
+  .Footer { grid-area: Footer; }
+  
+  .Amount { grid-area: Amount; }
+  
+  .Text { grid-area: Text; }
+  
+  .Expenses {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.3fr 2.4fr 0.3fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "ButtonsExp ButtonsExp ButtonsExp"
+      "Text2 Text2 Amount2"
+      "FooterExp FooterExp FooterExp";
+    grid-area: Expenses;
+  }
+  
+  .ButtonsExp { grid-area: ButtonsExp; }
+  
+  .FooterExp { grid-area: FooterExp; }
+  
+  .Text2 { grid-area: Text2; }
+  
+  .Amount2 { grid-area: Amount2; }
+  
+  .Savings {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.3fr 2.4fr 0.3fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "ButtonsSave ButtonsSave ButtonsSave"
+      "Text3 Text3 Amount3"
+      "FooterSave FooterSave FooterSave";
+    grid-area: Savings;
+  }
+  
+  .ButtonsSave { grid-area: ButtonsSave; }
+  
+  .FooterSave { grid-area: FooterSave; }
+  
+  .Text3 { grid-area: Text3; }
+  
+  .Amount3 { grid-area: Amount3; }
+  
+  .Statistics {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      ". . .";
+    grid-area: Statistics;
+  }
+  

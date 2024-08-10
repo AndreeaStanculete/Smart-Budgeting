@@ -1,0 +1,28 @@
+{% extends "components/webpage.html" %}
+{% load static %}
+
+{% block specific_headers %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock specific_headers %}
+
+{% block specific_body %}
+    <div class="cover-container p-3">
+        <main role="main" class="inner cover" style="margin-left: 10%; margin-right: 10%;">
+            <h2 style="font-size: 5vw;">How to keep a budget and why</h2>
+            <p class="lead" id="indexText">
+                <b>Keeping a budget</b> is important in order to control your spending, avoid debt, 
+                plan for emergencies and maximize savings and investments. It is also the key element 
+                to help you achieve financial independence.
+            </p>
+            <p class="lead" id="indexText">
+                In our days, managing your finances effectively is done so much easier with user-friendly 
+                applications, such as <i>Smart Budgeting</i>! Through it, you can calculate your income, list your expenses, 
+                track your money flow, and receive personalised feedback based on your monthly data. 
+            </p>
+            <p class="lead" id="indexText">
+                Register now to create and maintain a budget
+                <a href="/account/register" class="btn btn-lg btn-registerButton">Register</a>
+            </p>
+        </main>
+    </div>
+{% endblock specific_body %}

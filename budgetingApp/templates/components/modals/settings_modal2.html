@@ -1,0 +1,28 @@
+{% extends "components/base/modal.html" %}
+
+{% block modal_content %}
+    <div class="modal-body">
+        <form method="post" action='/account/update'>
+            {% csrf_token %}
+
+            <input type="hidden" name="_method" value="POST" />
+            <input type="hidden" value="other" name="updateOption" />
+
+            <label for="currencyIncome" class="form-label">Change the main currency</label>
+            <select class="form-select" id="currency" name="newData">
+                {% for key in currencies %}
+                    {% if MainCurrency == key %}
+                        <option selected>{{key}}</option>
+                    {% else %}
+                        <option>{{key}}</option> 
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#{{ modalId }}"> Close </a>
+            </div>
+        </form>
+    </div>
+{% endblock modal_content %}

@@ -1,0 +1,72 @@
+{% extends "components/base/card.html" %}
+
+{% block card_content %}
+    <h3 class="d-flex align-items-center mb-3"><i class="material-icons mr-2" style="color: #5b7c99">
+        {{ chartTitle }}
+    </i></h3>
+    {% if displayBalance == 1 %}
+        <table class="table">
+            <tbody>
+                {% if remainingMoney|length > 0 %}
+                    <tr style="border: none;"> 
+                        <td style="border: none;"><b>Remaining money</b></td>
+                        <td style="border: none;">
+                            {% for key, value in remainingMoney.items %}
+                                {{value}} {{key}} <br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>No incomes or expenses this month.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    
+    {% if displayBalance == 1 %}
+        <div style="max-height: 280px; overflow: auto;">
+            <div>
+                <canvas id="{{ graphId }}"></canvas>
+            </div>
+        </div>
+    {% else %}
+        {% if chartTitle == "Income Summary" %}
+            {% if Incomes|length > 0 %}
+                <div style="max-height: 280px; overflow: auto;">
+                    <div>
+                        <canvas id="{{ graphId }}"></canvas>
+                    </div>
+                </div>
+            {% else %}
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Not enough data to compile this chart.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        {% elif chartTitle == "Expenses Summary" %}
+            {% if Expenses|length > 0 %}
+                <div style="max-height: 280px; overflow: auto;">
+                    <div>
+                        <canvas id="{{ graphId }}"></canvas>
+                    </div>
+                </div>
+            {% else %}
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Not enough data to compile this chart.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+
+{% endblock card_content %}

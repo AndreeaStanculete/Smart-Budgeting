@@ -1,0 +1,17 @@
+{% extends "components/base/modal.html" %}
+
+{% block modal_content %}
+    <form method="post" action="/account/generate_unique_link">
+        {% csrf_token %}
+
+        <div class="modal-body" style="text-align: left !important;">
+            <label for="type" class="form-label">Insert your email</label>
+            <input class="form-control" type="email" id="email" name="email" required/>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn" id="MainButton">Send link</button>
+            <a class="btn btn-secondary" aria-current="page" href="/main"> Close </a>
+        </div>
+    </form>
+{% endblock modal_content %}

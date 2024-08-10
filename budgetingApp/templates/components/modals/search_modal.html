@@ -1,0 +1,20 @@
+{% extends "components/base/modal.html" %}
+
+{% block modal_content %}
+    <div class="modal-body">
+        <table class="table">
+            <tbody>
+                {% for Contor, Name, Price, URL in SearchResult %}
+                    <tr style="border: none;"> 
+                        <td style="border: none;">{{Contor}}. <a href="{{URL}}" target="_blank" style="color: black"> {{Name}} </a> 
+                        <i>{{Price}} RON</i> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-secondary" aria-current="page" href="/main"> Close </a>
+    </div>
+{% endblock modal_content %}

@@ -1,0 +1,68 @@
+{% extends "components/webpage.html" %}
+{% load static %}
+
+{% block specific_headers %}
+    <link rel="stylesheet" href="{% static 'css/MainPage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photo.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"> 
+
+    <script src="{% static 'js/photo.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"> </script>
+{% endblock specific_headers %}
+
+{% block specific_body %}
+    <br style="height: 2px;">
+    <div class="mainPage ">
+        <div class="container">
+            <div class="row gutters-sm">
+                {% include "components/cards/options_card.html" %}
+                
+                {% include "components/cards/info_card.html" with financeType="Income" modalId="IncomeInformation" modalTitle="Your Income" Finances=Incomes TotalFinance=TotalIncome sources=income_categories %}
+                {% include "components/cards/info_card.html" with financeType="Expense" modalId="ExpenseInformation" modalTitle="Your Expense" Finances=Expenses TotalFinance=TotalExpense sources=expense_categories %}
+
+                {% include "components/cards/graph_card.html" with graphId="lineGraph" chartTitle="Overall Balance" displayBalance=1 %}
+                {% include "components/cards/graph_card.html" with graphId="barGraph" chartTitle="Income Summary" displayBalance=0 %}
+                {% include "components/cards/graph_card.html" with graphId="pieGraph" chartTitle="Expenses Summary" displayBalance=0 %}
+
+                
+            </div>
+        </div>
+    </div>
+
+    {% include "components/modals/creation_modal.html" with financeType="Income" modalId="addIncome" modalTitle="Add Income" sources=income_categories %}
+    {% include "components/modals/creation_modal.html" with financeType="Expense" modalId="addExpense" modalTitle="Add Expense" sources=expense_categories %}
+    {% include "components/modals/upload_modal.html" with modalId="uploadFiles" modalTitle="Upload receipts" %}
+    {% include "components/modals/camera_modal.html" with modalId="cameraUpdate" modalTitle="Upload receipts" %}
+
+    {% if NewExpenses %}
+        {% include "components/modals/expense_modal.html" with modalId="receiptsData" modalTitle="Data from receipts" isMandatory=1 %}
+    {% endif %}
+
+    {% if SearchResult %}
+        {% include "components/modals/search_modal.html" with modalId="searchData" modalTitle="Your search returned..." isMandatory=1 %}
+    {% endif %}
+
+    <script src="{% static 'js/chart.js' %}"> </script>
+    <script src="{% static 'js/info_modal.js' %}"> </script>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            drawChart(0, "lineGraph", {{ lineLabels|safe }}, {{ lineData|safe }});
+            drawChart(1, "barGraph", {{ barLabels|safe }}, {{ barData|safe }});
+            drawChart(2, "pieGraph", {{ pieLabels|safe }}, {{ pieData|safe }});
+        };
+    </script>
+
+    <script type="text/javascript">
+        $("#start").on("input", function() {
+            var newValue = $(this).val();
+            var payload = {new_data: newValue, csrfmiddlewaretoken: "{{ csrf_token }}" };
+
+            $.post("/account/change_month", payload, function() {
+                window.location.href = "/main";
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"> </script>
+{% endblock specific_body %}

@@ -1,0 +1,45 @@
+{% extends "components/base/modal.html" %}
+
+{% block modal_content %}
+    <form method="post" action="/finance/update">
+        {% csrf_token %}
+
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="modal-body" style="text-align: left !important;">
+            <input class="form-control" value="{{ financeType }}" type="hidden" name="operationType"/>
+
+            <label for="type" class="form-label">Select type of {{ financeType|lower }}</label>
+            <select class="form-select" id="category" name="category">
+                {% for source in sources %}
+                    <option>{{ source }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="amountIncome" class="form-label">Enter amount</label>
+            <input class="form-control" type="text" onkeypress="return isNumber(event)" id="amountIncome" name="amount" required/>
+
+            <label for="currency" class="form-label">Select currency</label>
+            <select class="form-select" id="currency" name="currency">
+                {% for key in currencies %}
+                    {% if MainCurrency == key %}
+                        <option selected>{{key}}</option>
+                    {% else %}
+                        <option>{{key}}</option> 
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <label for="period" class="form-label">Select periodicity of {{ financeType|lower }}</label>
+            <select class="form-select" id="period" name="period">
+                {% for periodicity in periodicities %}
+                    <option>{{ periodicity }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn" id="MainButton">Save</button>
+            <a class="btn btn-secondary" aria-current="page" href="/main"> Close </a>
+        </div>
+    </form>
+{% endblock modal_content %}

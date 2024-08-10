@@ -1,0 +1,31 @@
+{% extends "components/base/modal.html" %}
+
+{% block modal_content %}
+    <form method="post" action="main">
+        {% csrf_token %}
+
+        <input type="hidden" name="_method" value="POST" />
+        <input type="text" value="2" id="modalId" name="modalId" style="display: none"/>
+        
+        <div class="modal-body">
+            <label for="form" class="form-label">Take a picture of your receipt</label>
+
+            <div style="margin-left:15%">
+                <div class="camera" class="justify-content-center">
+                    <video id="video">Video stream not available.</video>
+                    <img id="photo"  style="display: none" />
+                    <input type="file" id="photoFile" name="photoFile" style="display: none" />
+                </div>
+                
+                <canvas id="canvas"> </canvas>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn" id="startbutton">Take photo</button>
+            <button  class="btn" id="tryagain" style="display: none">Try again</button>
+            <button id="sendbutton" class="btn" type="submit" disabled>Upload receipt</button>
+            <a class="btn btn-secondary" aria-current="page" href="/main"> Close </a>
+        </div>
+    </form>
+{% endblock modal_content %}

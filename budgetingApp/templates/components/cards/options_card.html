@@ -1,0 +1,26 @@
+{% extends "components/base/card.html" %}
+
+{% block card_content %}
+    <h3 class="d-flex align-items-center mb-3"><i class="material-icons mr-2" style="color: #5b7c99">Options</i>
+        <div style="position: absolute; right: 3px;">
+
+        </div>
+    </h3>
+
+    <div style="max-height: 280px; overflow: auto;">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td style="border: none;">Month to display:</td>
+                    <td style="border: none;"><input type="month" id="start" name="start" min="2024-01" value="{{ month }}" style="width: 70%" /></td>
+                </tr>
+
+                <tr>
+                    <td style="border: none;">To export data:</td>
+                    <td style="border: none;"><button style="width: 70%" onclick="location.href='/account/export_data'">Export</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock card_content %}

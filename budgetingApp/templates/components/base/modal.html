@@ -1,0 +1,16 @@
+{% if isMandatory %}
+    <div class="modal fade show" id="{{ modalId }}" style="display: block" aria-modal="true" role="dialog">
+{% else %}
+    <div class="modal fade" id="{{ modalId }}">
+{% endif %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ modalTitle }}</h4>
+                {% block modal_header %} {% endblock modal_header %}
+            </div>
+        
+            {% block modal_content %} {% endblock modal_content %}
+        </div>
+    </div>
+</div>

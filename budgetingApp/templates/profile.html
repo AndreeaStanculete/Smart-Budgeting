@@ -1,0 +1,169 @@
+{% extends "components/webpage.html" %}
+{% load static %}
+
+{% block specific_headers %}
+    <link rel="stylesheet" href="{% static 'css/MainPage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Profile.css' %}">
+
+    <script src="{% static 'js/profile.js' %}"></script>
+{% endblock specific_headers %}
+
+{% block specific_body %}
+<div class="container">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="position: absolute; right: 3px;">
+                        </div>
+
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="{{ imageURL }}" alt="profilePicture" class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4>{{username}}</h4>
+                                <p class="text-secondary mb-1">{{email}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <div class="mt-3">
+                                {% include "components/buttons/profile_button.html" with modalTargetId="changeProfilePic" buttonName="Change profile picture" only %}
+                                <br><br>
+                                
+                                {% include "components/buttons/profile_button.html" with modalTargetId="changeEmail" buttonName="Change email" only %}
+                                <br><br>
+                                
+                                {% include "components/buttons/profile_button.html" with modalTargetId="changeUsername" buttonName="Change username" only %}
+                                <br><br>
+                                
+                                {% include "components/buttons/profile_button.html" with modalTargetId="changeSettings" buttonName="Other settings" only %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="text-align: left !important;">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0"><strong>Periodical incomes</strong></h6>
+                            </div>
+
+                            <div class="col-sm-9 text-secondary">
+                                {% if foundIncome == 1 %}
+                                    <table class="table" id="incomes">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">next due on</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {% for Period, Value in PeriodicalIncomes.items %}
+                                                {% for Id, Category, Amount, Currency, DueOnDate, Periodical in Value %}
+                                                    <tr style="border: none;">
+                                                        <td style="border: none;">{{Category}}</td>
+                                                        <td style="border: none;">{{Amount}} {{Currency}}</td>
+                                                        <td style="border: none;">{{DueOnDate}}</td>
+                                                        <td style="width: 10px; height: 5px; padding: 0px; border: none;">
+                                                            <button id="{{ Id }}" type="button" class="btn mainBtn showIncome" data-id="{{ Id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
+                                                    <input type="hidden" value="{{ Id }}" id="{{ Id }}">
+                                                    <input type="hidden" value="{{ Category }}" id="type_{{ Id }}">
+                                                    <input type="hidden" value="{{ Amount }}" id="amount_{{ Id }}">
+                                                    <input type="hidden" value="{{ Currency }}" id="currency_{{ Id }}">
+                                                    <input type="hidden" value="{{ DueOnDate }}" id="date_{{ Id }}">
+                                                    <input type="hidden" value="{{ Periodical }}" id="periodical_{{ Id }}">
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    There are no periodical incomes to show.
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0"><strong>Periodical expenses</strong></h6>
+                            </div>
+
+                            <div class="col-sm-9 text-secondary">
+                                {% if foundIncome == 1 %}
+                                    <table class="table" id="expenses">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">next due on</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {% for Period, Value in PeriodicalExpenses.items %}
+                                                {% for Id, Category, Amount, Currency, DueOnDate, Periodical in Value %}
+                                                    <tr style="border: none;">
+                                                        <td style="border: none;">{{Category}}</td>
+                                                        <td style="border: none;">{{Amount}} {{Currency}}</td>
+                                                        <td style="border: none;">{{DueOnDate}}</td>
+                                                        <td style="width: 10px; height: 5px; padding: 0px; border: none;">
+                                                            <button id="{{ Id }}" type="button" class="btn mainBtn showExpense" data-id="{{ Id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
+                                                    <input type="hidden" value="{{ Id }}" id="{{ Id }}">
+                                                    <input type="hidden" value="{{ Category }}" id="type_{{ Id }}">
+                                                    <input type="hidden" value="{{ Amount }}" id="amount_{{ Id }}">
+                                                    <input type="hidden" value="{{ Currency }}" id="currency_{{ Id }}">
+                                                    <input type="hidden" value="{{ DueOnDate }}" id="date_{{ Id }}">
+                                                    <input type="hidden" value="{{ Periodical }}" id="periodical_{{ Id }}">
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    There are no periodical expenses to show.
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% with actionURL="/finance/periodical/update" returnURL="/main/profile" periodicities=periodicities currencies=currencies %}
+    {% include "components/modals/info_modal.html" with financeType="Income" modalId="IncomeInformation" modalTitle="Your Income" sources=inc_sources %}
+    {% include "components/modals/info_modal.html" with financeType="Expense" modalId="ExpenseInformation" modalTitle="Your Expense" sources=exp_sources %}
+{% endwith %}
+
+{% include "components/modals/profile_pic_modal.html" with modalId="changeProfilePic" modalTitle="Change your profile picture" %}
+
+{% include "components/modals/settings_modal.html" with modalId="changeEmail" modalTitle="Change your email" option="email" oldValue=email %}
+{% include "components/modals/settings_modal.html" with modalId="changeUsername" modalTitle="Change your username" option="username" oldValue=username %}
+{% include "components/modals/settings_modal2.html" with modalId="changeSettings" modalTitle="Application settings" %}
+
+<script src="{% static 'js/info_modal.js' %}"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"> </script>
+
+{% endblock specific_body %}

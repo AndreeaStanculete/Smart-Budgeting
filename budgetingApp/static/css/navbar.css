@@ -1,0 +1,44 @@
+/* Navbar stilization */
+
+.bg-light {
+	--bs-bg-opacity: 0.0 !important;
+	background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.nav-link {
+	color: #ffffff !important;
+	border-radius: 8px;
+    font-size: 1.5vw !important;
+}
+
+.navbar-brand {
+	font-size: 1.5vw !important;
+}
+
+.nav-item a{
+	font-size: 1.5vw;
+}
+
+.nav-item a:hover{
+	background-color: hsl(0, 0%, 95%, 20%) !important;
+}
+
+.searchInput {
+	width: 80%;
+}
+
+.search:hover {
+	background-color: hsl(0, 0%, 95%, 20%) !important;
+}
+
+@media (min-width: 992px) {
+	.col-lg-4 {
+		flex: 0 0 auto !important;
+		width: 30% !important;
+	} 
+
+	.searchInput {
+		width: 50%;
+	}
+
+}
