@@ -1,2 +1,2 @@
 # Smart-Budgeting
-A financial tracking app
+A financial tracking application
